@@ -1,0 +1,10 @@
+name = "fortran-browser"
+version = "0.1.0"
+license = "license"
+author = "Maxwell Lenhoff"
+maintainer = "maxwelll@hackclub.app"
+copyright = "Copyright 2026, Maxwell Lenhoff"
+
+[dependencies]
+http = { git = "https://github.com/fortran-lang/http-client.git" }
+stdlib = "*"
