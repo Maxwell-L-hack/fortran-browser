@@ -8,3 +8,8 @@ copyright = "Copyright 2026, Maxwell Lenhoff"
 [dependencies]
 http = { git = "https://github.com/fortran-lang/http-client.git" }
 stdlib = "*"
+
+[[executable]]
+name = "fortran-browser"
+source-dir = "src"
+main = "main.f90"
