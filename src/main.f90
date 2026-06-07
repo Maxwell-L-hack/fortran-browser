@@ -3,11 +3,19 @@ program simple_get
     implicit none
     type(response_type) :: response
 
-    character(len=:),allocatable :: url_input
+    character(len=2048) :: url_string
+    character(len=:), allocatable :: url_input
 
     print *,'Enter the URL you wish to view:'
-    read (*,*) url_input
+    read (*,'(A)') url_string
 
+    url_input = trim(adjustl(url_string))
+
+    if (len_trim(url_input) == 0) then
+        print *, 'Error message: No URL was provided'
+        stop 1
+    end if
+    
     response = request(url=url_input)
 
     ! Check if the request was successful
