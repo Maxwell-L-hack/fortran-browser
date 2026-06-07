@@ -5,6 +5,7 @@ program simple_get
 
     character(len=2048) :: url_string
     character(len=:), allocatable :: url_input
+    character(len=:), allocatable :: user_platform_string
 
     print *,'Enter the URL you wish to view:'
     read (*,'(A)') url_string
@@ -12,15 +13,18 @@ program simple_get
     url_input = trim(adjustl(url_string))
 
     if (len_trim(url_input) == 0) then
-        print *, 'Error message: No URL was provided'
+        print *, 'Error: No URL was provided'
         stop 1
     end if
     
     response = request(url=url_input)
 
+    print *,'Enter the platform you''re on, either terminal or gui.'
+    read (*,'(A)') user_platform_string
+
     ! Check if the request was successful
     if (.not. response%ok) then
-        print *, 'Error message:', response%err_msg
+        print *, 'Error: ', response%err_msg
     else
         ! Print the response details
         print *, 'Response Code    :', response%status_code
@@ -28,5 +32,14 @@ program simple_get
         print *, 'Response Method  :', response%method
         print *, 'Response Content :', response%content
     end if
+    
+
 
 end program simple_get
+
+function tag_remover(arg) result(retval)
+    integer, intent(in) :: arg
+    integer :: retval
+
+    
+end function tag_remover
