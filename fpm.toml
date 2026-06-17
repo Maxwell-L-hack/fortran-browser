@@ -8,6 +8,7 @@ copyright = "Copyright 2026, Maxwell Lenhoff"
 [dependencies]
 http = { git = "https://github.com/fortran-lang/http-client.git" }
 stdlib = "*"
+gtk-fortran = { git = "https://github.com/vmagnin/gtk-fortran.git", branch = "gtk4"}
 
 [[executable]]
 name = "fortran-browser"

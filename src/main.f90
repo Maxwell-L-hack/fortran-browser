@@ -1,6 +1,27 @@
-program simple_get
-  use http, only: response_type, request
+module handlers
+
+  use, intrinsic :: iso_c_binding
+  use gtk
   implicit none
+
+  contains
+    subroutine activate
+    end subroutine activate
+end module handlers
+
+
+program simple_get
+  use, intrinsic :: iso_c_binding
+  use http, only: response_type, request
+  use handlers
+  use gtk
+  use g
+
+  implicit none
+  integer(c_int)      :: status
+  type(c_ptr)         :: app
+
+  app = gtk_application_new("Maxwell-L-hack.gtk-fortran-browser")
 
   type(response_type) :: response
 
@@ -38,32 +59,7 @@ program simple_get
     
   if (user_platform_string == 'terminal') then
     print *, 'Response Content (tags removed):'
-    print *, tag_remover(response%content)
   end if
 
-contains
-
-  function tag_remover(s) result(a)
-    character(len=:), allocatable :: a
-    character(len=*), intent(in) :: s
-    integer :: i, in_tag
-
-    a = ''
-    in_tag = 0
-
-    do i = 1, len(s)
-      select case (s(i:i))
-      case ('<')
-        in_tag = 1
-      case ('>')
-        in_tag = 0
-      case default
-        if (in_tag == 0) then
-          a = a // s(i:i)
-        end if
-      end select
-    end do
-
-  end function tag_remover
 
 end program simple_get
